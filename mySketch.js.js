@@ -26,7 +26,7 @@ const imageOrder = [
 ];
 
 function setup() {
-  createCanvas(1500, 800); // Set canvas size to 1500x600 initially
+  createCanvas(1500, 850); // Set canvas size to 1500x600 initially
   initializeObjects();
 }
 
@@ -90,7 +90,7 @@ function draw() {
 
 function windowResized() {
   const maxWidth = 1920; // Maximum width allowed
-  const maxHeight = 800; // Maximum height allowed
+  const maxHeight = 850; // Maximum height allowed
 
   let canvasWidth = min(maxWidth, windowWidth);
   let canvasHeight = (canvasWidth * maxHeight) / maxWidth;
