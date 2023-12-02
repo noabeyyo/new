@@ -89,13 +89,24 @@ function draw() {
 }
 
 function windowResized() {
-  // Recalculate canvas size when the window is resized to maintain responsiveness
-  resizeCanvas(min(1920, windowWidth), (min(1920, windowWidth) * 600) / 1920);
-  imageSize = (270 * width) / 1500; // Adjust imageSize proportionally
+  const maxWidth = 1920; // Maximum width allowed
+  const maxHeight = 800; // Maximum height allowed
+
+  let canvasWidth = min(maxWidth, windowWidth);
+  let canvasHeight = (canvasWidth * maxHeight) / maxWidth;
+
+  if (canvasHeight > windowHeight) {
+    canvasHeight = windowHeight;
+    canvasWidth = (canvasHeight * maxWidth) / maxHeight;
+  }
+
+  resizeCanvas(canvasWidth, canvasHeight);
+  imageSize = (270 * canvasWidth) / 1500; // Adjust imageSize proportionally
 
   objects = []; // Clear existing objects
   initializeObjects(); // Reinitialize objects with updated canvas size
 }
+
 
 	
 		
