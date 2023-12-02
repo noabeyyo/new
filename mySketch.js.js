@@ -87,21 +87,7 @@ function draw() {
     }
   }
 }
-
 function windowResized() {
-  deleteExtra();
-  es = [];
-  width = windowWidth;
-  height = windowHeight;
-
-  resizeCanvas(width, height);
-  let dep = max(width, height);
-  ortho(-width / 2, width / 2, height / 2, -height / 2, -dep * 2, dep * 2);
-  eyeZ = height / 2 / tan((30 * PI) / 180);
-  wall = new IntersectPlane(0, 0, 1, 0, 0, 300);
-  noStroke();
-  init();
-
   const maxWidth = 1920; // Maximum width allowed
   const maxHeight = 700; // Maximum height allowed
 
@@ -113,11 +99,13 @@ function windowResized() {
     canvasWidth = (canvasHeight * maxWidth) / maxHeight;
   }
 
+  resizeCanvas(canvasWidth, canvasHeight);
   imageSize = (270 * canvasWidth) / 1600; // Adjust imageSize proportionally
 
   objects = []; // Clear existing objects
   initializeObjects(); // Reinitialize objects with updated canvas size
 }
+
 
 
 
