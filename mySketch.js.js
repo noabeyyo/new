@@ -26,7 +26,7 @@ const imageOrder = [
 ];
 
 function setup() {
-  createCanvas(1700, 950); // Set canvas size to 1500x600 initially
+  createCanvas(1500, 700); // Set canvas size to 1500x600 initially
   initializeObjects();
 }
 
