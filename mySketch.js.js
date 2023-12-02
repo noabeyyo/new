@@ -26,7 +26,7 @@ const imageOrder = [
 ];
 
 function setup() {
-  createCanvas(1500, 850); // Set canvas size to 1500x600 initially
+  createCanvas(1700, 850); // Set canvas size to 1500x600 initially
   initializeObjects();
 }
 
@@ -101,7 +101,7 @@ function windowResized() {
   }
 
   resizeCanvas(canvasWidth, canvasHeight);
-  imageSize = (270 * canvasWidth) / 1500; // Adjust imageSize proportionally
+  imageSize = (270 * canvasWidth) / 1700; // Adjust imageSize proportionally
 
   objects = []; // Clear existing objects
   initializeObjects(); // Reinitialize objects with updated canvas size
