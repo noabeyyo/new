@@ -1,11 +1,8 @@
-
-		
-		
-		let objects = [];
-let gravity = 0.8; // Gravity for gentle falling
+let objects = [];
+let gravity = 0.5; // Gravity for gentle falling
 const numObjects = 50; // Number of floating objects (increased for the new photos)
-let imageSize = 270; // Size of the image (increased size)
-const separation = 1; // Separation between stacked images
+let imageSize = 275; // Size of the image (increased size)
+const separation = 2; // Separation between stacked images
 
 // Define an ordered list of image file names
 const imageOrder = [
@@ -14,7 +11,8 @@ const imageOrder = [
   'arti2.png',  // New photo   
   'peni.png',  // New photo   
   'gosti.png',  // New photo   
-  'tropit.png',  // New photo      
+  'tropit.png',  // New photo   
+  'cdra2.png',  // New photo   
   'tilt.png',  // New photo   
   'loli2.png',  // New photo   
   'cakep.png',  // New photo   
@@ -22,15 +20,11 @@ const imageOrder = [
   'pilp.png',  // New photo
   'cakee.png',  // New photo
   'arti3.png',  // New photo
-  // Add other image filenames here
 ];
 
 function setup() {
-  createCanvas(1600, 700); // Set canvas size to 1500x600 initially
-  initializeObjects();
-}
+  createCanvas(windowWidth, windowHeight); // Set canvas size to match the window
 
-function initializeObjects() {
   let y = height - imageSize / 2; // Starting position at the bottom of the canvas
 
   // Loop through the ordered list of images
@@ -51,10 +45,9 @@ function draw() {
   // Draw transparent background
   clear();
   
-  // Draw rounded rectangle as canvas background
-  fill('#FCE8ED'); // Set container color to FCE8ED
+  
   noStroke(); // No stroke for the rectangle
-  rect(0, 0, width, height, 30); // Rounded corners with 30 degrees
+  rect(0, 0, width, height, 0); // Rounded corners with 30 degrees
 
   for (let object of objects) {
     object.applyGravity(gravity);
@@ -87,31 +80,26 @@ function draw() {
     }
   }
 }
+
 function windowResized() {
-  const maxWidth = 1920; // Maximum width allowed
-  const maxHeight = 700; // Maximum height allowed
+  // Adjust canvas size when the window is resized to maintain responsiveness
+  resizeCanvas(windowWidth, windowHeight);
+  
+  let y = height - imageSize / 2; // Starting position at the bottom of the canvas
 
-  let canvasWidth = min(maxWidth, windowWidth);
-  let canvasHeight = (canvasWidth * maxHeight) / maxWidth;
+  for (let object of objects) {
+    const x = random(width); // Randomize x positions when the window is resized
+    const rotationSpeed = random(-0.2, 0.2); // Random rotation speed with a wider range
 
-  if (canvasHeight > windowHeight) {
-    canvasHeight = windowHeight;
-    canvasWidth = (canvasHeight * maxWidth) / maxHeight;
+    // Load images based on the ordered list, cycling through them
+    const imgFileName = imageOrder[objects.indexOf(object) % imageOrder.length];
+    const img = loadImage(imgFileName);
+
+    object.updateProperties(x, y, rotationSpeed, img);
+    y -= imageSize + separation; // Update the y position for the next image with separation
   }
-
-  resizeCanvas(canvasWidth, canvasHeight);
-  imageSize = (270 * canvasWidth) / 1600; // Adjust imageSize proportionally
-
-  objects = []; // Clear existing objects
-  initializeObjects(); // Reinitialize objects with updated canvas size
 }
 
-
-
-
-	
-		
-		
 class FloatingObject {
   constructor(x, y, rotationSpeed, img) {
     this.x = x;
