@@ -1,8 +1,8 @@
 let objects = [];
-let gravity = 1; // Gravity for gentle falling
+let gravity = 0.5; // Gravity for gentle falling
 const numObjects = 50; // Number of floating objects (increased for the new photos)
-let imageSize = 275; // Size of the image (increased size)
-const separation = 0.8; // Separation between stacked images
+let imageSize = 100; // Size of the image (increased size)
+const separation = 0.5; // Separation between stacked images
 
 // Define an ordered list of image file names
 const imageOrder = [
@@ -14,12 +14,14 @@ const imageOrder = [
   'tropit.png',  // New photo   
   'cdra2.png',  // New photo   
   'tilt.png',  // New photo   
-  'loli2.png',  // New photo   
-  'cakep.png',  // New photo   
+  'loli2.png',  // New photo     
   'cloudi.png',  // New photo   
   'pilp.png',  // New photo
   'cakee.png',  // New photo
   'arti3.png',  // New photo
+  'orange2.png',  // New photo
+  'artii.png',  // New photo
+  'ncake.png',  // New photo
 ];
 
 function setup() {
@@ -42,12 +44,7 @@ function setup() {
 }
 
 function draw() {
-  // Draw transparent background
-  clear();
-  
-  
-  noStroke(); // No stroke for the rectangle
-  rect(0, 0, width, height, 0); // Rounded corners with 30 degrees
+  clear(); // Clears the background every frame to make it transparent
 
   for (let object of objects) {
     object.applyGravity(gravity);
@@ -68,7 +65,7 @@ function draw() {
         const minDistance = object.size / 2 + other.size / 2 + overlap;
         const distance = dist(object.x, object.y, other.x, other.y);
         if (distance < minDistance) {
-          const pushForce = (minDistance - distance) * 0.5;
+          const pushForce = (minDistance - distance) * 0.3;
           if (object.y < other.y) {
             object.y -= pushForce;
             object.speedY = 0;
